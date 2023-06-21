@@ -1,11 +1,22 @@
---- Makefile.orig       2023-06-09 21:30:40.000000000 +1000
-+++ Makefile    2023-06-21 13:34:23.000000000 +1000
+--- Makefile.orig       2023-06-21 15:15:14.283336770 +1000
++++ Makefile    2023-06-21 15:14:51.708204930 +1000
 @@ -139,7 +139,7 @@
  #CC = gcc
  #CC = other
  CPPFLAGS = $(RAWHIDE_DEFINES) $(PCRE2_DEFINES) $(ACL_DEFINES) $(EA_DEFINES) $(ATTR_DEFINES) $(FLAG_DEFINES) $(MAGIC_DEFINES) $(DEBUG_DEFINES) $(HAVE_SYS_SYSMACROS) $(HAVE_SYS_MKDEV)
 -ALL_CFLAGS = $(CFLAGS) -O3 -g -Wall -pedantic $(CPPFLAGS) $(PCRE2_CFLAGS) $(ACL_CFLAGS) $(EA_CFLAGS) $(ATTR_CFLAGS) $(FLAG_CFLAGS) $(MAGIC_CFLAGS) $(GCOV_CFLAGS) $(UBSAN_CFLAGS)
-+ALL_CFLAGS = -O3 -g -Wall -pedantic $(CPPFLAGS) $(PCRE2_CFLAGS) $(ACL_CFLAGS) $(EA_CFLAGS) $(ATTR_CFLAGS) $(FLAG_CFLAGS) $(MAGIC_CFLAGS) $(GCOV_CFLAGS) $(UBSAN_CFLAGS) $(CFLAGS)
++ALL_CFLAGS = -O3 -g -Wall -pedantic $(CFLAGS) $(CPPFLAGS) $(PCRE2_CFLAGS) $(ACL_CFLAGS) $(EA_CFLAGS) $(ATTR_CFLAGS) $(FLAG_CFLAGS) $(MAGIC_CFLAGS) $(GCOV_CFLAGS) $(UBSAN_CFLAGS)
  ALL_LDFLAGS = $(LDFLAGS) $(PCRE2_LDFLAGS) $(ACL_LDFLAGS) $(EA_LDLAGS) $(ATTR_LDFLAGS) $(FLAG_LDFLAGS) $(MAGIC_LDFLAGS) $(UBSAN_LDFLAGS)
 
  OBJS = rhcmds.o rh.o rhparse.o rhdir.o rhdata.o rhstr.o rherr.o
+--- configure.orig	2023-06-21 15:02:27.544776181 +1000
++++ configure	2023-06-14 23:53:57.580143195 +1000
+@@ -995,7 +995,7 @@
+ 
+ 		--prefix=*)
+ 			echo "Configuring $opt"
+-			prefix="${1#--prefix=}"
++			prefix="${opt#--prefix=}"
+ 			[ "$prefix" = "default" ] && prefix=/usr/local
+ 			editconf Makefile 's,^\(PREFIX = \).*$,\1'"$prefix"','
+ 			;;
